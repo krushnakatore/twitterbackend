@@ -32,10 +32,16 @@ export const signInController = async (req, res, next) => {
 
     const user = await userModel.findOne({ username });
 
+    if (!user) {
+      return next(errorHandlerController(404, "User not found"));
+    }
+
     const match = await comparePassword(req.body.password, user.password);
 
     if (!match) {
-      return next(errorHandlerController(404, "User not found"));
+      return next(
+        errorHandlerController(404, "Username or Password not match")
+      );
     }
 
     const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
