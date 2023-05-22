@@ -16,8 +16,8 @@ router.put("/update/:id", verifyUser, updateUserController);
 
 router.delete("/delete/:id", verifyUser, deleteUserController);
 
-router.post("/follow/:id", verifyUser, followController);
+router.put("/follow/:id", verifyUser, followController);
 
-router.post("/unfollow/:id", verifyUser, unFollowController);
+router.put("/unfollow/:id", verifyUser, unFollowController);
 
 export default router;

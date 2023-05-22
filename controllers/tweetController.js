@@ -1,6 +1,7 @@
 import tweetModel from "../models/tweetSchema.js";
 import userModel from "../models/userSchema.js";
 import { errorHandlerController } from "../error/errorHandler.js";
+import fs from "fs";
 
 export const createTweetController = async (req, res, next) => {
   try {
@@ -84,11 +85,7 @@ export const getAllTweetsController = async (req, res) => {
       })
     );
 
-    res.status(200).send({
-      success: true,
-      message: "All Tweets extracted Successfully",
-      userTweets: userTweets.concat(...followersTweets),
-    });
+    res.status(200).json(userTweets.concat(...followersTweets));
   } catch (err) {
     console.log(err);
     res.status(502).send({
@@ -104,11 +101,7 @@ export const getUserTweetsController = async (req, res) => {
       .find({ userId: req.params.id })
       .sort({ createdAt: -1 });
 
-    res.status(200).send({
-      success: true,
-      message: "All Tweets extracted Successfully",
-      userTweets,
-    });
+    res.status(200).send(userTweets);
   } catch (err) {
     console.log(err);
     res.status(502).send({
@@ -124,11 +117,7 @@ export const exploreAllTweetsController = async (req, res) => {
       .find({ likes: { $exists: true } })
       .sort({ likes: -1 });
 
-    res.status(200).send({
-      success: true,
-      message: "All Tweets extracted Successfully",
-      exploreTweets,
-    });
+    res.status(200).json(exploreTweets);
   } catch (err) {
     console.log(err);
     res.status(502).send({

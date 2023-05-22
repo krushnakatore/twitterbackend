@@ -18,13 +18,13 @@ router.post("/create", verifyUser, createTweetController);
 router.delete("/delete/:id", verifyUser, deleteTweetController);
 
 //like or dislike
-router.put("/like/:id", verifyUser, likeDislikeTweetController);
+router.put("/like/:id", likeDislikeTweetController);
 
 //all tweets
-router.get("/timeline/:id", verifyUser, getAllTweetsController);
+router.get("/timeline/:id", getAllTweetsController);
 
 //get users tweets only
-router.get("/user/:id", verifyUser, getUserTweetsController);
+router.get("/user/all/:id", getUserTweetsController);
 
 //explore all tweets
 router.get("/explore", exploreAllTweetsController);

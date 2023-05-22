@@ -20,7 +20,7 @@ export const signUpController = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .send({ success: true, message: "Sign Up Succesfully", othersData });
+      .json(othersData);
   } catch (err) {
     console.log("Error getting user", err);
   }
@@ -53,7 +53,7 @@ export const signInController = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .send({ success: true, message: "Signed in Succesfully", othersData });
+      .json(othersData);
   } catch (err) {
     console.log("Error getting user", err);
   }

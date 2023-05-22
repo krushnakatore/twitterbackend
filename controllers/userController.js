@@ -40,7 +40,7 @@ export const deleteUserController = async (req, res, next) => {
   if (req.params.id === req.user.id) {
     try {
       const user = await userModel.findByIdAndDelete(req.params.id);
-      await tweetModel.findByIdAndDelete({ userId: req.params.id });
+      await tweetModel.remove({ userId: req.params.id });
 
       return res
         .status(200)
