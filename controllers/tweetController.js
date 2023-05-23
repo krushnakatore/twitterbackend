@@ -23,11 +23,33 @@ export const createTweetController = async (req, res, next) => {
   }
 };
 
+export const updateTweetController = async (req, res, next) => {
+  try {
+    const tweet = await tweetModel.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body },
+      { new: true }
+    );
+
+    res.status(200).send({
+      success: true,
+      message: "Tweet Updated Successfully",
+      tweet,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(502).send({
+      success: false,
+      message: "Error in Tweet Updation",
+    });
+  }
+};
+
 export const deleteTweetController = async (req, res) => {
   try {
     const tweet = await tweetModel.findById(req.params.id);
 
-    if (tweet.userId === req.body.userId) {
+    if (tweet.userId === req.params.userId) {
       const tweet = await tweetModel.findByIdAndDelete(req.params.id);
       res.status(200).send({
         success: true,
