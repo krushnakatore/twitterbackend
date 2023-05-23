@@ -15,7 +15,10 @@ export const signUpController = async (req, res, next) => {
 
     const { password, ...othersData } = user._doc;
 
-    res.cookie("access_token", token).status(200).json(othersData);
+    res
+      .cookie("access_token", token)
+      .status(200)
+      .send({ user: othersData, access_token: token });
   } catch (err) {
     console.log("Error getting user", err);
   }
@@ -43,7 +46,10 @@ export const signInController = async (req, res, next) => {
 
     const { password, ...othersData } = user._doc;
 
-    res.cookie("access_token", token).status(200).json(othersData);
+    res
+      .cookie("access_token", token)
+      .status(200)
+      .send({ user: othersData, access_token: token });
   } catch (err) {
     console.log("Error getting user", err);
   }
